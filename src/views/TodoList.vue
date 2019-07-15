@@ -11,30 +11,30 @@
     </div>
 </template>
 
-<script>
-  import {createComponent, value} from 'vue-function-api';
-  import SearchBar from '@/components/SearchBar';
-  import ListBody from '@/components/ListBody';
-  import FooterBar from '@/components/FooterBar';
+<script lang="ts">
+    import {createComponent, value} from "vue-function-api";
+    import SearchBar from "components/SearchBar.vue";
+    import ListBody from "components/ListBody.vue";
+    import FooterBar from "components/FooterBar.vue";
 
-  const TodoList = createComponent({
-    components: {ListBody, SearchBar, FooterBar},
-    setup(props, context) {
-      // data
-      let searchContent = value('');
-      let count = value(0);
-      // methods
-      const doSearch = (search) => {
-        searchContent.value = search;
-        count.value++;
-      };
-      return {
-        searchContent,
-        count,
-        doSearch
-      };
-    }
-  });
+    const TodoList = createComponent({
+        components: {ListBody, SearchBar, FooterBar},
+        setup(props, context) {
+            // data
+            let searchContent = value("");
+            let count = value(0);
+            // methods
+            const doSearch = (search: string) => {
+                searchContent.value = search;
+                count.value++;
+            };
+            return {
+                searchContent,
+                count,
+                doSearch
+            };
+        }
+    });
 
-  export default TodoList;
+    export default TodoList;
 </script>

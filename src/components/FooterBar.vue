@@ -10,32 +10,36 @@
     </div>
 </template>
 
-<script>
-  import {createComponent, computed, value} from 'vue-function-api';
-  import {useStore} from '@/store';
-  import {bus} from '@/utils/bus';
+<script lang="ts">
+    import {createComponent, computed, value} from "vue-function-api";
+    import {useStore} from "@/store";
+    import {bus} from "@/utils/bus";
 
-  const FooterBar = createComponent({
-    props: {
-      interval: String
-    },
-    setup(props) {
-      // local data, or from bus/store
-      const localInterval = value(Number(props.interval));
-      const total = computed(() => bus.total);
-      const storedTotal = computed(() => useStore().state.total);
-      // methods
-      const expandInterval = () => {
-        localInterval.value++;
-      };
-      return {
-        localInterval,
-        total,
-        storedTotal,
-        expandInterval
-      };
+    interface FooterBarProps {
+        interval: string;
     }
-  });
 
-  export default FooterBar;
+    const FooterBar = createComponent({
+        props: {
+            interval: String
+        },
+        setup(props) {
+            // local data, or from bus/store
+            const localInterval = value(Number(props.interval));
+            const total = computed(() => bus.total);
+            const storedTotal = computed(() => useStore().state.total);
+            // methods
+            const expandInterval = () => {
+                localInterval.value++;
+            };
+            return {
+                localInterval,
+                total,
+                storedTotal,
+                expandInterval
+            };
+        }
+    });
+
+    export default FooterBar;
 </script>

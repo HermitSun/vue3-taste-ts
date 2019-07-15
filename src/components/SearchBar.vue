@@ -8,22 +8,22 @@
     </div>
 </template>
 
-<script>
-  import {createComponent, value} from 'vue-function-api';
+<script lang="ts">
+    import {createComponent, value} from "vue-function-api";
 
-  const SearchBar = createComponent({
-    setup(props, context) {
-      // data
-      const searchContent = value('');
-      // methods
-      const doSearch = () => {
-        context.emit('search', searchContent.value);
-      };
-      return {
-        searchContent,
-        doSearch
-      };
-    }
-  });
-  export default SearchBar;
+    const SearchBar = createComponent({
+        setup(props, context) {
+            // data
+            const searchContent = value("");
+            // methods
+            const doSearch = () => {
+                context.emit("search", searchContent.value);
+            };
+            return {
+                searchContent,
+                doSearch
+            };
+        }
+    });
+    export default SearchBar;
 </script>
