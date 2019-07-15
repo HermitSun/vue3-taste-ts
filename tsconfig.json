@@ -19,6 +19,24 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "assets/*": [
+        "src/assets/*"
+      ],
+      "components/*": [
+        "src/components/*"
+      ],
+      "enums/*": [
+        "src/enums/*"
+      ],
+      "utils/*": [
+        "src/utils/*"
+      ],
+      "types/*": [
+        "src/types/*"
+      ],
+      "views/*": [
+        "src/views/*"
       ]
     },
     "lib": [

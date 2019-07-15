@@ -1,11 +1,18 @@
 <template>
     <div id="app">
-        <div id="nav">
-            <router-link to="/">Home</router-link>
+        <div class="nav">
+            <router-link to="/">TodoList</router-link>
             |
-            <router-link to="/about">About</router-link>
+            <router-link to="/lifecycle">Lifecycle</router-link>
+            |
+            <router-link to="/watcher">Watcher</router-link>
         </div>
-        <router-view/>
+        <hr/>
+        <!--view-->
+        <keep-alive v-if="$route.meta.keepAlive">
+            <router-view></router-view>
+        </keep-alive>
+        <router-view v-else></router-view>
     </div>
 </template>
 

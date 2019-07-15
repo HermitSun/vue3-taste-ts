@@ -1,18 +1,24 @@
-/**
- * meta可配置参数
- * @param {boolean} icon 页面icon
- * @param {boolean} keepAlive 是否缓存页面
- * @param {string} title 页面标题
- */
 export default [
     {
         path: '/',
-        name: 'home',
-        component: () => import('views/Home.vue'),
+        name: 'index',
+        component: () => import('views/TodoList.vue'),
     },
     {
-        path: '/about',
-        name: 'about',
-        component: () => import('views/About.vue'),
+        path: '/lifecycle',
+        name: 'lifecycle',
+        component: () => import('views/Lifecycle.vue'),
+        meta: {
+            keepAlive: true,
+        },
+    },
+    {
+        path: '/watcher',
+        name: 'watcher',
+        component: () => import('views/Watcher.vue'),
+    },
+    {
+        path: '*',
+        redirect: '/',
     },
 ];

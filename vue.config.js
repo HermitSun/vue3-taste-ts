@@ -29,7 +29,7 @@ module.exports = {
   },
   devServer: {
     https: false, // https:{type:Boolean}
-    open: true, //配置自动启动浏览器
+    open: true, // 配置自动启动浏览器
     port: 8085 // 端口号
   },
 };
