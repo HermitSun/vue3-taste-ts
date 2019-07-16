@@ -22,7 +22,7 @@
         onBeforeDestroy,
         onDestroyed,
         onUnmounted,
-        value
+        value,
     } from "vue-function-api";
     import {useMouse} from "components/mouse";
     import Parent from "components/Parent.vue";
@@ -71,9 +71,9 @@
                 content,
                 x,
                 y,
-                triggerContentChange
+                triggerContentChange,
             };
-        }
+        },
     });
 
     export default LifecycleComponent;

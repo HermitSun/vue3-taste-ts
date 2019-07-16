@@ -8,7 +8,6 @@
     import Vue from "vue";
     import {createComponent, onErrorCaptured} from "vue-function-api";
 
-
     export default createComponent({
         // errorCaptured (err, vm, info) {
         //   console.log('Parent: ' + err.toString())
@@ -21,8 +20,8 @@
                     console.log("Parent: " + err.toString());
                     console.log("info: " + info);
                     return false;
-                }
+                },
             );
-        }
+        },
     });
 </script>

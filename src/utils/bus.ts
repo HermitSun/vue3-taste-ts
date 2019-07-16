@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import {plugin, state} from 'vue-function-api';
+import Vue from "vue";
+import {plugin, state} from "vue-function-api";
 
 Vue.use(plugin);
 

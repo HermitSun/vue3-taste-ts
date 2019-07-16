@@ -21,9 +21,9 @@
             };
             return {
                 searchContent,
-                doSearch
+                doSearch,
             };
-        }
+        },
     });
     export default SearchBar;
 </script>

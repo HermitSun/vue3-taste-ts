@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 
 Vue.use(Vuex);
 
@@ -17,10 +17,10 @@ const store = new Vuex.Store({
     },
     actions: {
         increaseTotal({commit}) {
-            commit('increaseTotal');
+            commit("increaseTotal");
         },
         decreaseTotal({commit}) {
-            commit('decreaseTotal');
+            commit("decreaseTotal");
         },
     },
 });

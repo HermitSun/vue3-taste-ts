@@ -51,7 +51,7 @@
     const ListBody = createComponent({
         props: {
             keyword: String,
-            count: Number
+            count: Number,
         },
         setup(props, {root}) {
             // data
@@ -77,10 +77,9 @@
                         //     testStrategies["others"]();
                         // }
                     }
+                }, {
+                    lazy: true,
                 },
-                {
-                    lazy: true
-                }
             );
             // methods
             const handleAdd = async () => {
@@ -97,7 +96,7 @@
                 await root.$store.dispatch("decreaseTotal");
             };
             const handleSearch = (val: string) => {
-                searchContent.value = listContent.value.filter(v => v.includes(val));
+                searchContent.value = listContent.value.filter((v) => v.includes(val));
             };
             return {
                 addContent,
@@ -105,9 +104,9 @@
                 searchContent,
                 total,
                 handleAdd,
-                handleRemove
+                handleRemove,
             };
-        }
+        },
     });
 
     export default ListBody;

@@ -21,7 +21,7 @@
 
     const FooterBar = createComponent({
         props: {
-            interval: String
+            interval: String,
         },
         setup(props) {
             // local data, or from bus/store
@@ -36,9 +36,9 @@
                 localInterval,
                 total,
                 storedTotal,
-                expandInterval
+                expandInterval,
             };
-        }
+        },
     });
 
     export default FooterBar;

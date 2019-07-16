@@ -28,7 +28,7 @@
         onCreated,
         onUnmounted,
         value,
-        watch
+        watch,
     } from "vue-function-api";
     import {getServerResponseUsingAsync, getServerResponseUsingPromise} from "@/api";
 
@@ -62,11 +62,11 @@
                     test1OldVal.value = oldVal;
                     // because of the async update queue, here represents the same
                     // actually values are different
-                    test1BeforeRequest.value = context.refs.test1.innerText;
-                    let res = await getServerResponseUsingAsync();
+                    test1BeforeRequest.value = (context.refs.test1 as HTMLElement).innerText;
+                    const res = await getServerResponseUsingAsync();
                     test1.value = res.test;
-                    test1AfterRequest.value = context.refs.test1.innerText;
-                }
+                    test1AfterRequest.value = (context.refs.test1 as HTMLElement).innerText;
+                },
             );
             const stopWatch2 = watch(
                 test2,
@@ -75,19 +75,18 @@
                     test2NewVal.value = newVal;
                     test2OldVal.value = oldVal;
                     getServerResponseUsingPromise()
-                        .then(res => {
+                        .then((res) => {
                             test2.value = res.data.test;
-                            test2AfterRequest.value = context.refs.test2.innerText;
+                            test2AfterRequest.value = (context.refs.test2 as HTMLElement).innerText;
                         })
-                        .catch(err => {
+                        .catch((err) => {
                             console.log(err.toString());
                         });
-                    test2BeforeRequest.value = context.refs.test2.innerText;
-                },
-                {
+                    test2BeforeRequest.value = (context.refs.test2 as HTMLElement).innerText;
+                }, {
                     lazy: true,
-                    flush: "pre"
-                }
+                    flush: "pre",
+                },
             );
             // hooks; TO BE EXPLICIT
             onCreated(() => {
@@ -109,9 +108,9 @@
                 test2BeforeRequest,
                 test2AfterRequest,
                 handleClick1,
-                handleClick2
+                handleClick2,
             };
-        }
+        },
     });
 
     export default WatcherComponent;

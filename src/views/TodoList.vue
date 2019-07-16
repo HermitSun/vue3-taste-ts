@@ -21,8 +21,8 @@
         components: {ListBody, SearchBar, FooterBar},
         setup(props, context) {
             // data
-            let searchContent = value("");
-            let count = value(0);
+            const searchContent = value("");
+            const count = value(0);
             // methods
             const doSearch = (search: string) => {
                 searchContent.value = search;
@@ -31,9 +31,9 @@
             return {
                 searchContent,
                 count,
-                doSearch
+                doSearch,
             };
-        }
+        },
     });
 
     export default TodoList;
