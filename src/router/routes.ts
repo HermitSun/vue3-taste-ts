@@ -6,7 +6,7 @@ export default [
     },
     {
         path: "/lifecycle",
-        name: "lifecycle",
+        name: "Lifecycle",
         component: () => import("views/Lifecycle.vue"),
         meta: {
             keepAlive: true,
@@ -14,8 +14,13 @@ export default [
     },
     {
         path: "/watcher",
-        name: "watcher",
+        name: "Watcher",
         component: () => import("views/Watcher.vue"),
+    },
+    {
+        path: "/this-and-refs",
+        name: "ThisAndRefs",
+        component: () => import("views/ThisAndRefs.vue"),
     },
     {
         path: "*",

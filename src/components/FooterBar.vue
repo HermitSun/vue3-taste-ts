@@ -27,22 +27,7 @@
             // local data, or from bus/store
             const localInterval = value(Number(props.interval));
             const total = computed(() => bus.total);
-            const storedTotal = computed(function() {
-                console.log(this); // refers to a new instance created by the plugin
-                return useStore().state.total;
-            });
-            watch(
-                function() {
-                    console.log(this); // refers to the instance
-                    return storedTotal;
-                },
-                function() {
-                    console.log(this); // undefined; 'this' can only be accessed in watcher's getter
-                }
-            );
-            onMounted(function() {
-                console.log(this); // refers to the instance
-            });
+            const storedTotal = computed(() => useStore().state.total);
             // methods
             const expandInterval = () => {
                 localInterval.value++;

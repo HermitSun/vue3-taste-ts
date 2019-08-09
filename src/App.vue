@@ -6,6 +6,8 @@
             <router-link to="/lifecycle">Lifecycle</router-link>
             |
             <router-link to="/watcher">Watcher</router-link>
+            |
+            <router-link to="/this-and-refs">ThisAndRefs</router-link>
         </div>
         <hr/>
         <!--view-->
