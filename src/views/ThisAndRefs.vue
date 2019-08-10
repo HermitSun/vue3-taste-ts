@@ -40,7 +40,9 @@
                 const input = refs.foo as HTMLElement;
                 input.focus();
             });
-            const increaseCount = () => count.value += 1;
+            const increaseCount = () => {
+                count.value += 1;
+            };
 
             console.log(refs.foo); // 'refs' is not accessible here; it has not been initialized
             useElementKeypress("Enter", () => refs.foo as HTMLElement, () => {
