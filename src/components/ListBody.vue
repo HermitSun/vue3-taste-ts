@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-    import {createComponent, computed, value, watch, Wrapper} from "vue-function-api";
+    import {createComponent, computed, ref, watch} from "@vue/composition-api";
     import {bus} from "@/utils/bus";
 
     // const testStrategies = {
@@ -51,15 +51,13 @@
     const ListBody = createComponent({
         props: {
             keyword: String,
-            count: Number,
+            count: Number
         },
         setup(props, {root}) {
             // data
-            const addContent = value("");
-            const typedList: string[] = [];
-            const listContent = value(typedList);
-            const typedSearch: string[] = [];
-            const searchContent = value(typedSearch);
+            const addContent = ref("");
+            const listContent = ref([] as string[]);
+            const searchContent = ref([] as string[]);
             // computed
             const total = computed(() => listContent.value.length);
             const searchKeyword = computed(() => (props.keyword as any) as string);
@@ -78,8 +76,8 @@
                         // }
                     }
                 }, {
-                    lazy: true,
-                },
+                    lazy: true
+                }
             );
             // methods
             const handleAdd = async () => {
@@ -104,9 +102,9 @@
                 searchContent,
                 total,
                 handleAdd,
-                handleRemove,
+                handleRemove
             };
-        },
+        }
     });
 
     export default ListBody;

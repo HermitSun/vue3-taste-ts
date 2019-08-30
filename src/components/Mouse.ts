@@ -1,8 +1,8 @@
-import {onMounted, onUnmounted, value} from "vue-function-api";
+import {onMounted, onUnmounted, ref} from "@vue/composition-api";
 
 export function useMouse() {
-    const x = value(0);
-    const y = value(0);
+    const x = ref(0);
+    const y = ref(0);
     const update = (e: MouseEvent) => {
         x.value = e.pageX;
         y.value = e.pageY;

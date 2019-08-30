@@ -14,53 +14,54 @@
 </template>
 
 <script lang="ts">
-    import {createComponent, onMounted, computed, value, watch} from "vue-function-api";
+    import {createComponent, onMounted, computed, ref, watch} from "@vue/composition-api";
 
     const thisAndRefsComponent = createComponent({
-        setup(props, {refs}) {
-            const count = value(0);
-            const inputText = value("");
-            const countPlusOne = computed(function() {
+        setup() {
+            // todo: this is a weird type inference
+            const foo = ref<HTMLInputElement>(document.createElement("input"));
+            const count = ref(0);
+            const inputText = ref("");
+            const countPlusOne = computed(function () {
                 console.log("computed: ", this); // refers to a 'new' instance created by the plugin
                 return count.value + 1;
             });
             watch(
-                function() {
+                function () {
                     console.log("watcher: ", this); // refers to the instance
                     return count;
                 },
-                function() {
+                function () {
                     console.log("watcher callback", this); // undefined; 'this' can only be accessed in watcher's getter
                 },
-                {lazy: true},
+                {lazy: true}
             );
-            onMounted(function() {
+            onMounted(function () {
+                console.log(foo.value);
                 console.log("mounted: ", this); // refers to the instance
-                console.log(refs.foo); // 'refs' is accessible here
-                const input = refs.foo as HTMLElement;
-                input.focus();
+                foo.value.focus();
             });
             const increaseCount = () => {
                 count.value += 1;
             };
-
-            console.log(refs.foo); // 'refs' is not accessible here; it has not been initialized
-            useElementKeypress("Enter", () => refs.foo as HTMLElement, () => {
-                (refs.foo as HTMLElement).blur();
+            useElementKeypress("Enter", () => foo.value, () => {
+                foo.value.blur();
             });
+            // 测试
             return {
+                foo,
                 count,
                 inputText,
                 countPlusOne,
-                increaseCount,
+                increaseCount
             };
-        },
+        }
     });
 
     function useElementKeypress(
         key: string,
         getElement: () => HTMLElement,
-        callback: () => void,
+        callback: () => void
     ) {
         const onKeydown = (event: KeyboardEvent) => {
             const pressed = event.key;

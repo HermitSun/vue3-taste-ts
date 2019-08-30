@@ -6,7 +6,7 @@
 
 <script lang="ts">
     import Vue from "vue";
-    import {createComponent, onErrorCaptured} from "vue-function-api";
+    import {createComponent, onErrorCaptured} from "@vue/composition-api";
 
     export default createComponent({
         setup() {
@@ -15,8 +15,8 @@
                     console.log("Parent: " + err.toString());
                     console.log("info: " + info);
                     return false;
-                },
+                }
             );
-        },
+        }
     });
 </script>

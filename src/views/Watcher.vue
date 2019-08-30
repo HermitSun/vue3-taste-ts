@@ -2,7 +2,7 @@
     <div>
         <div>
             <p>immediate + post</p>
-            <div ref="test1">{{test1}}</div>
+            <div ref="testOne">{{test1}}</div>
             <button @click="handleClick1">test</button>
             <div>new: {{test1NewVal}}</div>
             <div>old: {{test1OldVal}}</div>
@@ -12,7 +12,7 @@
         <hr/>
         <div>
             <p>lazy + pre</p>
-            <div ref="test2">{{test2}}</div>
+            <div ref="testTwo">{{test2}}</div>
             <button @click="handleClick2">test</button>
             <div>new: {{test2NewVal}}</div>
             <div>old: {{test2OldVal}}</div>
@@ -25,25 +25,26 @@
 <script lang="ts">
     import {
         createComponent,
-        onCreated,
         onUnmounted,
-        value,
-        watch,
-    } from "vue-function-api";
+        ref,
+        watch
+    } from "@vue/composition-api";
     import {getServerResponseUsingAsync, getServerResponseUsingPromise} from "@/api";
 
     const WatcherComponent = createComponent({
-        setup(props, context) {
-            const test1 = value("begin");
-            const test1NewVal = value("");
-            const test1OldVal = value("");
-            const test1BeforeRequest = value("");
-            const test1AfterRequest = value("");
-            const test2 = value("begin");
-            const test2NewVal = value("");
-            const test2OldVal = value("");
-            const test2BeforeRequest = value("");
-            const test2AfterRequest = value("");
+        setup() {
+            const testOne = ref(document.createElement("div"));
+            const test1 = ref("begin");
+            const test1NewVal = ref("");
+            const test1OldVal = ref("");
+            const test1BeforeRequest = ref("");
+            const test1AfterRequest = ref("");
+            const testTwo = ref(document.createElement("div"));
+            const test2 = ref("begin");
+            const test2NewVal = ref("");
+            const test2OldVal = ref("");
+            const test2BeforeRequest = ref("");
+            const test2AfterRequest = ref("");
             const handleClick1 = () => {
                 test1.value = "end";
             };
@@ -62,11 +63,11 @@
                     test1OldVal.value = oldVal;
                     // because of the async update queue, here represents the same
                     // actually values are different
-                    test1BeforeRequest.value = (context.refs.test1 as HTMLElement).innerText;
+                    test1BeforeRequest.value = testOne.value.innerText;
                     const res = await getServerResponseUsingAsync();
                     test1.value = res.test;
-                    test1AfterRequest.value = (context.refs.test1 as HTMLElement).innerText;
-                },
+                    test1AfterRequest.value = testOne.value.innerText;
+                }
             );
             const stopWatch2 = watch(
                 test2,
@@ -77,40 +78,38 @@
                     getServerResponseUsingPromise()
                         .then((res) => {
                             test2.value = res.data.test;
-                            test2AfterRequest.value = (context.refs.test2 as HTMLElement).innerText;
+                            test2AfterRequest.value = testTwo.value.innerText;
                         })
                         .catch((err) => {
                             console.log(err.toString());
                         });
-                    test2BeforeRequest.value = (context.refs.test2 as HTMLElement).innerText;
+                    test2BeforeRequest.value = testTwo.value.innerText;
                 }, {
                     lazy: true,
-                    flush: "pre",
-                },
+                    flush: "pre"
+                }
             );
-            // hooks; TO BE EXPLICIT
-            onCreated(() => {
-                console.log("-ON CREATE-");
-            });
             onUnmounted(() => {
                 stopWatch1();
                 stopWatch2();
             });
             return {
+                testOne,
                 test1,
                 test1NewVal,
                 test1OldVal,
                 test1BeforeRequest,
                 test1AfterRequest,
+                testTwo,
                 test2,
                 test2NewVal,
                 test2OldVal,
                 test2BeforeRequest,
                 test2AfterRequest,
                 handleClick1,
-                handleClick2,
+                handleClick2
             };
-        },
+        }
     });
 
     export default WatcherComponent;

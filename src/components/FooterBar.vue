@@ -11,9 +11,9 @@
 </template>
 
 <script lang="ts">
-    import {createComponent, onMounted, computed, value, watch} from "vue-function-api";
+    import {createComponent, computed, ref} from "@vue/composition-api";
     import {useStore} from "@/store";
-    import {bus} from "@/utils/bus";
+    import {bus} from "utils/bus";
 
     interface FooterBarProps {
         interval: string;
@@ -21,11 +21,14 @@
 
     const FooterBar = createComponent({
         props: {
-            interval: String,
-        },
-        setup(props) {
+            interval: {
+                type: String,
+                required: true
+            }
+        } as const,
+        setup(props: FooterBarProps) {
             // local data, or from bus/store
-            const localInterval = value(Number(props.interval));
+            const localInterval = ref(Number(props.interval));
             const total = computed(() => bus.total);
             const storedTotal = computed(() => useStore().state.total);
             // methods
@@ -36,9 +39,9 @@
                 localInterval,
                 total,
                 storedTotal,
-                expandInterval,
+                expandInterval
             };
-        },
+        }
     });
 
     export default FooterBar;

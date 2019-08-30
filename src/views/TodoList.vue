@@ -12,17 +12,17 @@
 </template>
 
 <script lang="ts">
-    import {createComponent, value} from "vue-function-api";
+    import {createComponent, ref, SetupContext} from "@vue/composition-api";
     import SearchBar from "components/SearchBar.vue";
     import ListBody from "components/ListBody.vue";
     import FooterBar from "components/FooterBar.vue";
 
     const TodoList = createComponent({
         components: {ListBody, SearchBar, FooterBar},
-        setup(props, context) {
+        setup(props: {}, context: SetupContext) {
             // data
-            const searchContent = value("");
-            const count = value(0);
+            const searchContent = ref("");
+            const count = ref(0);
             // methods
             const doSearch = (search: string) => {
                 searchContent.value = search;
@@ -31,9 +31,9 @@
             return {
                 searchContent,
                 count,
-                doSearch,
+                doSearch
             };
-        },
+        }
     });
 
     export default TodoList;

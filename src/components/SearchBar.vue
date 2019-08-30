@@ -9,21 +9,21 @@
 </template>
 
 <script lang="ts">
-    import {createComponent, value} from "vue-function-api";
+    import {createComponent, ref, SetupContext} from "@vue/composition-api";
 
     const SearchBar = createComponent({
-        setup(props, context) {
+        setup(props: {}, {emit}: SetupContext) {
             // data
-            const searchContent = value("");
+            const searchContent = ref("");
             // methods
             const doSearch = () => {
-                context.emit("search", searchContent.value);
+                emit("search", searchContent.value);
             };
             return {
                 searchContent,
-                doSearch,
+                doSearch
             };
-        },
+        }
     });
     export default SearchBar;
 </script>

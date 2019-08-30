@@ -12,34 +12,29 @@
 <script lang="ts">
     import {
         createComponent,
-        onCreated,
         onBeforeMount,
         onMounted,
         onBeforeUpdate,
         onUpdated,
         onActivated,
         onDeactivated,
-        onBeforeDestroy,
-        onDestroyed,
+        onBeforeUnmount,
         onUnmounted,
-        value,
-    } from "vue-function-api";
+        ref
+    } from "@vue/composition-api";
     import {useMouse} from "components/Mouse";
     import Parent from "components/Parent.vue";
     import Child from "components/Child.vue";
 
     const LifecycleComponent = createComponent({
         components: {Parent, Child},
-        setup(props, context) {
-            const content = value("LIFECYCLE");
+        setup() {
+            const content = ref("LIFECYCLE");
             const {x, y} = useMouse();
             const triggerContentChange = () => {
                 content.value += " changed";
             };
             // hooks; TO BE EXPLICIT
-            onCreated(() => {
-                console.log("-ON CREATE-");
-            });
             onBeforeMount(() => {
                 console.log("-BEFORE MOUNT-");
             });
@@ -58,11 +53,8 @@
             onDeactivated(() => {
                 console.log("-ON DEACTIVATE-");
             });
-            onBeforeDestroy(() => {
-                console.log("-BEFORE DESTROY-");
-            });
-            onDestroyed(() => {
-                console.log("-ON DESTROY-");
+            onBeforeUnmount(() => {
+                console.log("-BEFORE UNMOUNT-");
             });
             onUnmounted(() => {
                 console.log("-ON UNMOUNT-");
@@ -71,9 +63,9 @@
                 content,
                 x,
                 y,
-                triggerContentChange,
+                triggerContentChange
             };
-        },
+        }
     });
 
     export default LifecycleComponent;

@@ -1,8 +1,5 @@
-import Vue from "vue";
-import {plugin, state} from "vue-function-api";
+import {reactive} from '@vue/composition-api';
 
-Vue.use(plugin);
-
-export const bus = state({
-    total: 0,
+export const bus = reactive({
+    total: 0
 });
